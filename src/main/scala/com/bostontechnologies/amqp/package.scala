@@ -37,6 +37,9 @@ package object amqp {
 
   def tag[U] = new Tagger[U]
 
+
+  type =>?[-A, +B] = PartialFunction[A, B]
+
   type RabbitShutdownListener = com.rabbitmq.client.ShutdownListener
   type RabbitConnection = com.rabbitmq.client.Connection
   type RabbitChannel = com.rabbitmq.client.Channel
@@ -83,12 +86,6 @@ package object amqp {
   implicit def seqOfValidationToValidationOfSeq[A, B](s: List[Validation[A, B]]): ListOfValidation[A, B] = new ListOfValidation(s)
 
 
-  object CustomTypes extends Types {
-  }
-
-  trait Types {
-    type =>?[-A, +B] = PartialFunction[A, B]
-  }
 
 
 }

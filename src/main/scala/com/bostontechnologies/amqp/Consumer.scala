@@ -14,7 +14,6 @@ import akka.util.{Timeout, Duration}
 import akka.actor._
 import com.rabbitmq.client.{Envelope, ShutdownSignalException}
 import akka.actor.FSM.Normal
-import CustomTypes._
 
 class Consumer(val handleDelivery: Either[ConsumerHandler, AckingConsumerHandler],
                val handleErrors: ErrorHandler,
