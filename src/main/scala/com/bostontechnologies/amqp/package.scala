@@ -43,8 +43,8 @@ package object amqp {
   type RabbitShutdownListener = com.rabbitmq.client.ShutdownListener
   type RabbitConnection = com.rabbitmq.client.Connection
   type RabbitChannel = com.rabbitmq.client.Channel
-  type RabbitAddress = com.rabbitmq.client.Address
   type RabbitConsumer = com.rabbitmq.client.Consumer
+  type RabbitAddress = com.rabbitmq.client.Address
 
 
   class PimpedValidation[+E, +A](val v: Validation[E, A]) {
@@ -57,35 +57,15 @@ package object amqp {
 
   class ListOfValidation[A, B](val seq: List[Validation[A, B]]) {
 
-
-    def toValidationTakingFirstFailure: Validation[A, List[B]] = {
-      import Validation.Monad._
-      seq.sequence[({type l[a] = Validation[A, a]})#l, B]
-    }
-
     def toValidationTakingAllFailures: Validation[List[A], List[B]] = {
       seq.traverse[({type l[a] = ValidationNEL[A, a]})#l, B](_.liftFailNel).failMap(_.list)
     }
   }
-
-
-  def toValidationIfNotNull[B, A](a: => A, failure: => B): Validation[B, A] = {
-    toValidation(Option(a), failure)
-  }
-
-  def toValidation[B, A](a: => Option[A], failure: => B): Validation[B, A] = {
-    a.toSuccess(failure)
-  }
-
-  def throwFailure[E <: Throwable, A](a: => Validation[E, A]): A = a.fold(throw _, a1 => a1)
 
   implicit def toValidationOfValidation[E, A](v: Validation[E, Validation[E, A]]) = new ValidationOfValidation(v)
 
   implicit def toRichValidation[E, A](v: Validation[E, A]): PimpedValidation[E, A] = new PimpedValidation(v)
 
   implicit def seqOfValidationToValidationOfSeq[A, B](s: List[Validation[A, B]]): ListOfValidation[A, B] = new ListOfValidation(s)
-
-
-
 
 }
