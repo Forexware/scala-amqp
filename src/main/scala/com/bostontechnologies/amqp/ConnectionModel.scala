@@ -8,6 +8,7 @@ import Scalaz._
 import ConsumerModel._
 import ChannelModel._
 import com.weiglewilczek.slf4s.Logging
+import shapeless.TypeOperators._
 
 object ConnectionModel extends Logging {
 
