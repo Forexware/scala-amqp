@@ -12,6 +12,7 @@ import akka.util.{Duration, Timeout}
 import ConsumerModel._
 import akka.actor._
 import com.rabbitmq.client.ShutdownSignalException
+import shapeless.TypeOperators._
 
 /**
  * Represents the state of a Connection
