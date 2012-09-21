@@ -2,6 +2,8 @@ package com.bostontechnologies.amqp
 
 import util.Random
 import com.rabbitmq.client.Address
+import shapeless.TypeOperators._
+
 
 sealed trait PreferredHost
 
