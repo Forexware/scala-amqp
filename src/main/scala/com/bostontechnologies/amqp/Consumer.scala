@@ -178,7 +178,7 @@ class Consumer(val handleDelivery: Either[ConsumerHandler, AckingConsumerHandler
     }
 
     def handleDelivery(tag: String, header: Envelope, properties: BasicProperties, msg: Array[Byte]) {
-      logger.info("Msg received - tag:" + tag)
+      logger.debug("Msg received - tag:" + tag)
       handleDelivery ! Delivery(tag, header, properties, msg)
     }
   }
