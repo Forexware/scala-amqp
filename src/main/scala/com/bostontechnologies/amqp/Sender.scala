@@ -1,6 +1,6 @@
 package com.bostontechnologies.amqp
 
-import com.weiglewilczek.slf4s.Logging
+import com.typesafe.scalalogging.slf4j.Logging
 import scala.collection.JavaConverters._
 import scalaz._
 import scalaz.{State => Statez}
