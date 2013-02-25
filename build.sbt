@@ -2,7 +2,7 @@ organization := "com.bostontechnologies"
 
 name := "scala-amqp"
 
-version := "0.4.0"
+version := "0.5.0-SNAPSHOT"
 
 resolvers +=  "Typesafe repo" at "http://repo.typesafe.com/typesafe/releases/"
 
